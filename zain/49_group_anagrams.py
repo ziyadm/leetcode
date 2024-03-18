@@ -1,21 +1,13 @@
+from collections import defaultdict
+from typing import List
+
 class Solution:
-    def groupAnagrams(self, strs):
-        sorted_dict = {}
-        sorted_set = set()
-        
+    def groupAnagrams(self, strs: List[str]) -> List[List[str]]:
+        sorted_word_to_anagrams = defaultdict(list)        
 
-        for original_string in strs:
-            sorted_string = "".join(sorted(original_string))
-            if sorted_string in sorted_set:
-                sorted_dict[sorted_string].append(original_string)
-            else:
-                sorted_dict[sorted_string] = [original_string]
-            sorted_set.add(sorted_string)
-       
-        results = []
+        for unsorted in strs:
+            sorted_word_to_anagrams["".join(sorted(unsorted))].append(unsorted)
 
-        for sorted_string in sorted_set:
-            results.append(sorted_dict[sorted_string])
-        return results
+        return [anagram_group for anagram_group in sorted_word_to_anagrams.values()]
         
        
