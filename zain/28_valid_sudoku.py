@@ -1,22 +1,21 @@
 class Solution:
     def isValidSudoku(self, board: List[List[str]]) -> bool:
-        row_sets = [set() for i in range(9)]
-        column_sets = [set() for i in range(9)]
         box_sets = [set() for i in range(9)]
-        for row in range(0, 8):
-            for column in range(0, 8):
-                current = board[row][column]
-                if current == '.':
-                    continue
-                
-                box = 3 * (row // 3) + (column // 3)
+        column_sets = [set() for i in range(9)]
+        row_sets = [set() for i in range(9)]
 
-                if current in row_sets[row] or \
-                current in column_sets[column] or \
-                current in box_sets[box]:
+        for row in range(9):
+            for column in range (9):
+                if board[row][column] == '.':
+                    continue  
+
+                if board[row][column] in column_sets[column]\
+                or board[row][column] in row_sets[row]\
+                or board[row][column] in box_sets[3 * (column // 3) + row // 3]:
                     return False
-                else:
-                    row_sets[row].add(current)
-                    column_sets[column].add(current)
-                    box_sets[box].add(current)
-        return True
+                
+                column_sets[column].add(board[row][column])
+                row_sets[row].add(board[row][column])
+                box_sets[3 * (column // 3) + row // 3].add(board[row][column])
+                
+        return True                
