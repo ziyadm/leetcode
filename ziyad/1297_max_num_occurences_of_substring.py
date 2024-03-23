@@ -45,7 +45,6 @@ class Solution:
             end_index = start_index
             char_frequencies = defaultdict(int)
 
-            0, 0 + 3, 0, 1, 2
             while end_index < start_index + minSize and end_index < len(s):
                 char_frequencies[s[end_index]] += 1
                 end_index += 1
